@@ -1,0 +1,8 @@
+
+# Personal credentials
+.personal
+.git-credentials
+
+# RSA keys
+id_rsa
+id_rsa.pub

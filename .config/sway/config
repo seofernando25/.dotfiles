@@ -1,0 +1,184 @@
+### Initial Config
+#
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Direction keys
+set $left j
+set $down k
+set $up i
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# First time launch the daemon, then the toggler
+set $menu bash -c 'pgrep -x "ulauncher" >/dev/null && (ulauncher-toggle; exit 0) || ulauncher'
+set $fm pcmanfm
+
+# Mouse config
+input * {
+    accel_profile "flat" # disable acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    pointer_accel 0 # set mouse sensitivity (between -1 and 1)
+}
+
+# Set up monitor refresh rate
+output DP-1 resolution 1920x1080@144hz background #000000 solid_color
+output DVI-D-1 resolution 1920x1080@60hz background #000000 solid_color
+# Check monitor cfg with: swaymsg -t get_outputs
+
+### Key bindings
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start launcher
+bindsym $mod+d exec $menu
+
+# Start file manager
+bindsym $mod+Shift+return exec $fm
+
+# Window dragging with mouse
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Screenshot to clipboard
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+# Screenshot full monitor
+bindsym $mod+Shift+Print exec grim - | wl-copy
+
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Move cursor with keyboard
+set $point_speed 25
+bindsym $mod+Left seat - cursor move -$point_speed 0
+bindsym $mod+Down seat - cursor move 0 $point_speed
+bindsym $mod+Up seat - cursor move 0 -$point_speed
+bindsym $mod+Right seat - cursor move $point_speed 0
+
+#
+# Workspaces:
+#
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+# Note: workspaces can have any name you want, not just numbers.
+# We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+
+# Resizing containers:
+mode "resize" {
+    bindsym $left resize shrink width 100px
+    bindsym $down resize grow height 100px
+    bindsym $up resize shrink height 100px
+    bindsym $right resize grow width 100px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+# Status Bar:
+bar {
+    position top
+    status_command while echo $(i3title) ' \| ' $(date +'%Y-%m-%d %I:%M:%S %p') ; do sleep 0.2; done
+    # status_command i3status
+    # title_align center
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+
+# Exceptions for apps
+
+# Allow mpv to float
+for_window [app_id="mpv"] floating enable
+
+# Allow ulauncher to float and disable titlebar
+for_window [app_id="ulauncher"] floating enable
+for_window [app_id="ulauncher"] border none
+ 

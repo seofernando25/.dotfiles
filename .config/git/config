@@ -1,0 +1,33 @@
+[credential]
+	helper = store
+	help = cache
+[user]
+	name = Fernando Nogueira
+	email = abert036@uottawa.ca
+	signingkey = 3B17726BF5CC9244
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesFile = /home/fer/.config/gitignore
+	autocrlf = input
+    editor = nano # No hard feelings, vim
+[merge]
+	conflictstyle = diff3
+[alias]
+	logs = log --oneline
+	last = log -1 HEAD --stat
+	configs = config --global -l
+	up = "!git remote update -p; git merge --ff-only @{u}"
+	staged = diff --cached --name-only
+	changes = diff --cached --name-only --diff-filter=ACMRTUXB
+	ui = "!f() { cd \"$(git rev-parse --show-toplevel)\" && gitui; }; f"
+	kraken = "!f() { cd \"$(git rev-parse --show-toplevel)\" && gitkraken & disown; }; f"
+[help]
+	autocorrect = 100
+[pull]
+	ff = no
+[commit]
+	gpgsign = true
