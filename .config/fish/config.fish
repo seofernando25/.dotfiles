@@ -18,4 +18,5 @@ set -gx PATH "$PNPM_HOME" $PATH
 set -gx YARN_HOME "/home/fer/.yarn"
 set -gx PATH "$YARN_HOME/bin" $PATH
 
+source ~/.aliases
 source ~/.profile
