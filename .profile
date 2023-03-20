@@ -1,6 +1,9 @@
 export EDITOR='nano'
 export VISUAL='nano'
 
+# Personal and sensitive information
+source ~/.personal
+
 # Path configuration
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -25,7 +28,3 @@ alias google-chrome=$BROWSER
 
 # FNM (Node Version Manager)
 eval "$(fnm env --use-on-cd)"
-
-
-# Personal and sensitive information
-source ~/.personal
