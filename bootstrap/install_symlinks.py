@@ -51,11 +51,10 @@ for f in files:
     print(f"File: {f}")
     print("####################")
     # Check if the file exists relative to the home directory
-    if os.path.exists(os.path.expanduser('~/' + f)):
-
-        if ctx == '3' or ctx == '4':
-            print("Skipping all...")
-            continue
+    path = os.path.expanduser('~/' + f)
+    # Fix "/./" in path
+    path = re.sub(r'/\./', '/', path)
+    if os.path.exists(path) and ctx not in ('3', '4'):
 
         print("File already exists, would you like to overwrite it?")
         print("1. Yes")
@@ -71,24 +70,32 @@ for f in files:
 
         if ctx == '1':
             print("Overwriting file...")
-            os.remove(os.path.expanduser('~/' + f))
+            os.remove(path)
         elif ctx == '2':
-            print("Skipping...")
+            print("Skipping file...")
             continue
         elif ctx == '3':
             print("Skipping all...")
             break
         elif ctx == '4':
             print("Overwriting all...")
-            os.remove(os.path.expanduser('~/' + f))
+            os.remove(path)
         elif ctx == '5':
             print("Exiting...")
             sys.exit(0)
 
     if ctx == '4':
         print("Overwriting all...")
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
     elif ctx == '1':
         print("Overwriting file...")
+        try:
+            os.remove(path)
+        except FileNotFoundError:
+            pass
     else:
         print("File does not exist, creating symlink...")
         try:
@@ -98,4 +105,7 @@ for f in files:
             continue
 
     # Create symlink
-    os.symlink(os.path.abspath(f), os.path.expanduser('~/' + f))
+    print("Creating symlink...")
+    print("file: " + f)
+    print("path: " + path)
+    os.symlink(os.path.abspath(f), path)
