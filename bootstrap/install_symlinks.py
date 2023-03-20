@@ -125,4 +125,12 @@ for f in files:
     print("Creating symlink...")
     print("file: " + f)
     print("path: " + path)
-    os.symlink(os.path.abspath(f), path)
+    target = os.path.abspath(f)
+
+    # Create directory if it doesn't exist
+    create_dir = os.path.dirname(path)
+    if not os.path.exists(create_dir):
+        print("Creating directory: " + create_dir)
+        os.makedirs(create_dir)
+
+    os.symlink(target, path)
