@@ -54,7 +54,19 @@ for f in files:
     path = os.path.expanduser('~/' + f)
     # Fix "/./" in path
     path = re.sub(r'/\./', '/', path)
-    if os.path.exists(path) and ctx not in ('3', '4'):
+
+    FILE_EXISTS = os.path.exists(path)
+    IS_LINK = os.path.islink(path)
+    if FILE_EXISTS and IS_LINK:
+        SAME_SYMLINK = FILE_EXISTS and (os.path.islink(
+            path) or os.readlink(path) == os.path.abspath(f))
+        if SAME_SYMLINK:
+            print("File is already symlinked, skipping...")
+            continue
+
+    SKIPPED_STEP = ctx not in ('3', '4')
+
+    if FILE_EXISTS and SKIPPED_STEP:
 
         print("File already exists, would you like to overwrite it?")
         print("1. Yes")
@@ -99,10 +111,15 @@ for f in files:
     else:
         print("File does not exist, creating symlink...")
         try:
-            input("Press enter to proceed (Ctrl+C to skip file))")
+            v = input(
+                "Press enter to proceed, or ctrl+c to skip, type anything to exit:")
         except KeyboardInterrupt:
             print("Skipping...")
             continue
+
+        if v != '':
+            print("Exiting...")
+            sys.exit(0)
 
     # Create symlink
     print("Creating symlink...")
