@@ -45,7 +45,7 @@ print("Filtering files...")
 # Prompt every file to be symlinked
 for f in files:
     print("####################")
-    print("File: {}".format(f))
+    print(f"File: {f}")
     print("####################")
     # Check if the file exists relative to the home directory
     if os.path.exists(os.path.expanduser('~/' + f)):
@@ -53,7 +53,6 @@ for f in files:
         continue
     else:
         print("File does not exist, creating symlink...")
-        break
         # Create symlink
-
+        break
         # os.symlink(os.path.abspath(f), os.path.expanduser('~/' + f))
