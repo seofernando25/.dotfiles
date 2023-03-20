@@ -24,6 +24,8 @@
 	changes = diff --cached --name-only --diff-filter=ACMRTUXB
 	ui = "!f() { cd \"$(git rev-parse --show-toplevel)\" && gitui; }; f"
 	kraken = "!f() { cd \"$(git rev-parse --show-toplevel)\" && gitkraken & disown; }; f"
+	# Update current branch with remote master
+	upm = "!f() { git up && git merge origin/master; }; f"
 [help]
 	autocorrect = 100
 [pull]

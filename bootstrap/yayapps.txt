@@ -97,7 +97,6 @@ flashplayer-standalone 32.0.0.465-1
 flatpak 1:1.15.4-1
 flex 2.6.4-4
 flips-git r135.96df78f-1
-fnm 1.33.1-1
 font-manager-git 0.8.8.r48.gb65f10af-1
 foot-terminfo 1.13.1-2
 freetype2 2.13.0-1

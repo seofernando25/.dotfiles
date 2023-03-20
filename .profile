@@ -8,7 +8,7 @@ source ~/.personal
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/var/lib/flatpak/exports/bin/:$PATH"
-export PATH="$PATH:$(yarn global bin)"
+export PATH="$HOME/.yarn/bin:$PATH"
 
 # BROWSER configuration
 export BROWSER="com.brave.Browser"
@@ -25,6 +25,5 @@ alias google-chrome=$BROWSER
 # export XDG_DATA_DIRS= "/usr/share:$XDG_DATA_DIRS"
 # export XDG_DATA_DIRS= "/var/lib/flatpak/exports/share:$XDG_DATA_DIRS"
 # export XDG_DATA_DIRS= "~/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
+# source /usr/share/nvm/init-nvm.sh
 
-# FNM (Node Version Manager)
-eval "$(fnm env --use-on-cd)"
