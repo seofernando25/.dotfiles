@@ -3,6 +3,7 @@
 
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
 
 exec_always 'pgrep -x autotiling >/dev/null || autotiling'
 
@@ -19,12 +20,12 @@ set $right l
 set $term alacritty
 # First time launch the daemon, then the toggler
 set $menu bash -c 'pgrep -x "ulauncher" >/dev/null && (ulauncher-toggle; exit 0) || ulauncher'
-set $fm pcmanfm
+set $fm nemo
 
 # Mouse config
 input * {
-    accel_profile "flat" # disable acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
-    pointer_accel 0 # set mouse sensitivity (between -1 and 1)
+    accel_profile "flat" 
+    pointer_accel 0
 }
 
 # Set up monitor refresh rate
@@ -188,3 +189,7 @@ for_window [class=".*"] border pixel 2
 # Allow mpv to float
 for_window [app_id="mpv"] floating enable
 for_window [app_id="ulauncher"] floating enable
+
+# Allow godot to float
+for_window [instance="Godot_Engine"] floating enable
+for_window [instance="Godot_Editor"] floating enable

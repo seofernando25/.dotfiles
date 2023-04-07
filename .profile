@@ -12,12 +12,13 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 # BROWSER configuration
 export BROWSER="com.brave.Browser"
+
+alias google-chrome="com.brave.Browser"
 export CHROME_BIN=$BROWSER
 export CHROME_PATH=$BROWSER
 
 alias chromium=$BROWSER
 alias chromium-browser=$BROWSER
-alias google-chrome=$BROWSER
 
 # XDG configuration (/etc/profile.d/flatpak.sh should already do this)
 # If for some reason the XDG_DATA_DIRS variable is not set 
@@ -27,3 +28,15 @@ alias google-chrome=$BROWSER
 # export XDG_DATA_DIRS= "~/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 # source /usr/share/nvm/init-nvm.sh
 
+# In "~/.outstem" there is a file called "outstem-config.json"
+#  read the "reposDir" and cd into it
+alias cdoutstem="cd $(cat ~/.outstem/outstem-config.json | jq -r '.reposDir')"
+
+# Node version manager
+fnm env | source
+
+# GTK theme
+export GTK_THEME="Adwaita-dark"
+
+# GTK icon theme
+export GTK_ICON_THEME="Papirus-Dark"
