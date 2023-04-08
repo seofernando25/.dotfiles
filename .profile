@@ -34,9 +34,3 @@ alias cdoutstem="cd $(cat ~/.outstem/outstem-config.json | jq -r '.reposDir')"
 
 # Node version manager
 fnm env | source
-
-# GTK theme
-export GTK_THEME="Adwaita-dark"
-
-# GTK icon theme
-export GTK_ICON_THEME="Papirus-Dark"

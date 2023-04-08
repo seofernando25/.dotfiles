@@ -5,7 +5,7 @@ exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
 
-exec_always 'pgrep -x autotiling >/dev/null || autotiling'
+# exec_always 'pgrep -x autotiling >/dev/null || autotiling'
 
 ### Variables
 #
@@ -20,7 +20,7 @@ set $right l
 set $term alacritty
 # First time launch the daemon, then the toggler
 set $menu bash -c 'pgrep -x "ulauncher" >/dev/null && (ulauncher-toggle; exit 0) || ulauncher'
-set $fm nemo
+set $fm thunar
 
 # Mouse config
 input * {
