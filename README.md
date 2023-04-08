@@ -4,6 +4,16 @@ This is my personal dotfiles repository. It contains configuration files for var
 
 I don't use XOrg, so there are no XOrg configuration files here. I use Wayland+Sway instead.
 
+## How to use 
+
+Run `bootstrap/install_symlinks.py` to create symlinks for all files in `dotfiles/` to `~/` (this can be destructive!)
+
+Run `bootstrap/yay_restore.sh` to install yay from src
+
+Run `bootstrap/flatpak_restore.sh` to install all flatpak apps from `flatpak-apps.txt`
+
+Run `bootstrap/pkg_restore.sh` to install all packages from `yayapps.txt` (not recommended)
+
 ## .personal template
 
 To be created at `~/`
@@ -29,4 +39,3 @@ export OUTSTEM_AWS_ACCESS_KEY_SECRET=$AWS_ACCESS_SECRET
 - [x] Install symlink script
 - [ ] List of installed apps (from pacman/yay)
 - [ ] Script to install apps from list
-- [ ] 
