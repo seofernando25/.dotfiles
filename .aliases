@@ -1,9 +1,9 @@
 # Personal aliases and exports
 
-alias ls='ls --color=auto'
-alias la='ls -a'
-alias ll='ls -la'
-alias l='ls'
+alias ls='lsd --color=auto'
+# alias la='ls -a'
+# alias ll='ls -la'
+# alias l='ls'
 alias less='less -R'
 alias grep='grep --color=auto'
 alias free="free -mt"

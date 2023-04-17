@@ -1,41 +1,49 @@
 {
-  // "layer": "top", // Waybar at top layer
+  "layer": "top", // Waybar at top layer
   // "position": "bottom", // Waybar position (top|bottom|left|right)
   "height": 30, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
   "modules-left": [
-    "sway/workspaces",
-    "sway/mode",
-    "sway/scratchpad"
+    "wlr/workspaces",
+    "hyprland/submap"
+    // "wlr/scratchpad"
   ],
-  "modules-center": ["sway/window"],
+  "modules-center": ["hyprland/window"],
   "modules-right": [
     "custom/media",
     "pulseaudio",
     "network",
     "cpu",
-    "memory",
+    // "memory",
     "clock",
     "tray"
   ],
+  "hyprland/submap": {
+    "format": "✌️ {}",
+    "max-length": 8,
+    "tooltip": false
+  },
   // Modules configuration
-  // "sway/workspaces": {
-  //     "disable-scroll": true,
-  //     "all-outputs": true,
-  //     "format": "{name}: {icon}",
-  //     "format-icons": {
-  //         "1": "",
-  //         "2": "",
-  //         "3": "",
-  //         "4": "",
-  //         "5": "",
-  //         "urgent": "",
-  //         "focused": "",
-  //         "default": ""
-  //     }
-  // },
+  "wlr/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    // "format-icons": {
+    //   "1": "",
+    //   "2": "",
+    //   "3": "",
+    //   "4": "",
+    //   "5": "",
+    //   "urgent": "",
+    //   "focused": "",
+    //   "default": ""
+    // },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "activate"
+  },
   "custom/media": {
     "format": "{icon} {}",
     "return-type": "json",
@@ -56,10 +64,10 @@
       "unlocked": ""
     }
   },
-  "sway/mode": {
+  "wlr/mode": {
     "format": "<span style=\"italic\">{}</span>"
   },
-  "sway/scratchpad": {
+  "wlr/scratchpad": {
     "format": "{icon} {count}",
     "show-empty": false,
     "format-icons": ["", ""],
@@ -83,7 +91,8 @@
   },
   "cpu": {
     "format": "{usage}% ",
-    "tooltip": false
+    "tooltip": false,
+    "on-click": "alacritty -e btop"
   },
   "memory": {
     "format": "{}% "
@@ -108,7 +117,9 @@
     "tooltip-format": "{ifname} via {gwaddr} ",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "Disconnected ⚠",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    // Open the network manager on click
+    "on-click": "nm-connection-editor"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -127,6 +138,6 @@
       "car": "",
       "default": ["", "", ""]
     },
-    "on-click": "pavucontrol"
+    "on-click": "org.pulseaudio.pavucontrol"
   }
 }

@@ -4,6 +4,12 @@
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 
+# Status Bar:
+bar swaybar_command waybar
+
+# Set up monitor refresh rate
+output DP-1 resolution 1920x1080@144hz background #000000 solid_color pos 0 0
+output DVI-D-1 resolution 1920x1080@60hz background #000000 solid_color
 
 # exec_always 'pgrep -x autotiling >/dev/null || autotiling'
 
@@ -28,9 +34,6 @@ input * {
     pointer_accel 0
 }
 
-# Set up monitor refresh rate
-output DP-1 resolution 1920x1080@144hz background #000000 solid_color
-output DVI-D-1 resolution 1920x1080@60hz background #000000 solid_color
 # Check monitor cfg with: swaymsg -t get_outputs
 
 ### Key bindings
@@ -171,8 +174,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-# Status Bar:
-bar swaybar_command waybar
+
 
 # Exceptions for apps
 

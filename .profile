@@ -13,7 +13,9 @@ export PATH="$HOME/.yarn/bin:$PATH"
 # BROWSER configuration
 export BROWSER="com.brave.Browser"
 
-alias google-chrome="com.brave.Browser"
+# alias google-chrome="com.brave.Browser"
+alias google-chrome=google-chrome-stable
+
 export CHROME_BIN=$BROWSER
 export CHROME_PATH=$BROWSER
 
