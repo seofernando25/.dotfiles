@@ -30,9 +30,5 @@ alias chromium-browser=$BROWSER
 # export XDG_DATA_DIRS= "~/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 # source /usr/share/nvm/init-nvm.sh
 
-# In "~/.outstem" there is a file called "outstem-config.json"
-#  read the "reposDir" and cd into it
-alias cdoutstem="cd $(cat ~/.outstem/outstem-config.json | jq -r '.reposDir')"
-
 # Node version manager
-fnm env | source
+# fnm env | source
