@@ -10,7 +10,7 @@ export PATH="/var/lib/flatpak/exports/bin/:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
 
 # BROWSER configuration
-export BROWSER="com.brave.Browser"
+export BROWSER="brave-browser"
 
 # alias google-chrome="com.brave.Browser"
 alias google-chrome=brave-browser

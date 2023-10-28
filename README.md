@@ -2,9 +2,7 @@
 
 This is my personal dotfiles repository. It contains configuration files for various programs and tools I use on a daily basis.
 
-I don't use XOrg, so there are no XOrg configuration files here. I use Wayland+Sway instead.
-
-## How to use 
+## How to use
 
 Run `bootstrap/install_symlinks.py` to create symlinks for all files in `dotfiles/` to `~/` (this can be destructive!)
 
